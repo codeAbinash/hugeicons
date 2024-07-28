@@ -21,7 +21,7 @@
    },
    "scripts": {
       "dev": "vite",
-      "build": "tsc && vite build",
+      "build": "tsc",
       "prettier": "prettier --check .",
       "prettier:fix": "prettier --write ."
    },

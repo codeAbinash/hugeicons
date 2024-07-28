@@ -10,7 +10,7 @@ const defaults = {
    strokeWidth: 1.7,
    color: 'currentColor',
    variant: 'stroke-rounded',
-   outputDir: './src/assets/icons',
+   outputDir: './src/assets/icons/src',
 }
 
 let options = process.argv.slice(2)
