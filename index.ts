@@ -67,6 +67,9 @@ async function main() {
       console.log('📛', iconName, '🖌️ ', strokeWidth, ' 🎨', color, '🪆 ', variant)
       console.log('📂', iconPath)
 
+      const str = `import ${getName(iconName)} from '@icons/${iconName}-${variant}.svg'`
+      copyToClipboard(str)
+
       const url = `${URL}/${iconName}-${variant}.svg`
       const iconData = await fetch(url)
       if (!iconData.ok) {
@@ -82,6 +85,21 @@ async function main() {
       console.log()
       //  console.log(`Icon ${iconName}-${variant}.svg downloaded successfully`)
    }
+}
+
+function copyToClipboard(text: string) {
+   var proc = require('child_process').spawn('clip')
+   proc.stdin.write(text)
+   proc.stdin.end()
+}
+
+function getName(str: string) {
+   let tmp = ''
+   let words = str.split('-')
+   words.forEach((word) => {
+      tmp += word.charAt(0).toUpperCase() + word.slice(1)
+   })
+   return tmp + 'Icon'
 }
 
 main()

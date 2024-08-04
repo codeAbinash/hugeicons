@@ -5,12 +5,11 @@ import fs from 'fs'
 // Clean up the icons folder
 // fs.rmdirSync('./icons', { recursive: true })
 
-// Create the icons folder
-// for (const variant of variants) {
-//    fs.mkdirSync(`./icons/${variant}`, { recursive: true })
-// }
+for (const variant of variants) {
+   if (!fs.existsSync(`./icons/${variant}`)) fs.mkdirSync(`./icons/${variant}`, { recursive: true })
+}
 
-fs.mkdirSync(`./icons/all`, { recursive: true })
+if (!fs.existsSync(`./icons/all`)) fs.mkdirSync(`./icons/all`, { recursive: true })
 
 let downloadCount = 0
 async function download() {
