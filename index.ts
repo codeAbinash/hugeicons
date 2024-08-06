@@ -78,15 +78,15 @@ async function main() {
 main()
 
 function updateIconsList() {
-   const iconsFilePath = './src/assets/icons/icons.ts'
+   const iconsListFilePath = './src/assets/icons/icons.ts'
 
-   if (!fs.existsSync(iconsFilePath)) fs.writeFileSync(iconsFilePath, '')
+   if (!fs.existsSync(iconsListFilePath)) fs.writeFileSync(iconsListFilePath, '')
    const iconStr = importExportStr(iconName, variant)
 
-   const icons = fs.readFileSync(iconsFilePath, 'utf-8')
-   if (icons.includes(iconStr)) return
+   const iconsList = fs.readFileSync(iconsListFilePath, 'utf-8')
+   if (iconsList.includes(iconStr)) return // if icon already exists in the list
 
-   fs.appendFileSync(iconsFilePath, iconStr)
+   fs.appendFileSync(iconsListFilePath, iconStr + '\n')
 }
 
 function exitIfError(iconData: Response) {

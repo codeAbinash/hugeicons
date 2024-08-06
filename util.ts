@@ -1,7 +1,7 @@
 import { defaultVariant, variants, type Variant } from './constants'
 
 export function importExportStr(iconName: string, variant: string) {
-   return `export { default as ${getCamelIconName(iconName, variant)} } from '@icons/${iconName}-${variant}.svg'\n`
+   return `export { default as ${getCamelIconName(iconName, variant)} } from '@icons/${iconName}-${variant}.svg'`
 }
 
 export function importStr(iconName: string, variant: string) {
