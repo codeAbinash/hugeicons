@@ -7,7 +7,7 @@ const URL = 'https://cdn.hugeicons.com/icons'
 
 const defaults = {
    iconName: '',
-   strokeWidth: 1.7,
+   strokeWidth: 1.5,
    color: 'currentColor',
    variant: 'stroke-rounded',
    outputDir: './src/assets/icons/src',
