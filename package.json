@@ -31,6 +31,7 @@
       "typescript": "^5.5.4"
    },
    "bin": {
-      "hugeicons": "dist/index.js"
+      "ic": "dist/index.js",
+      "rmic": "dist/rmic.js"
    }
 }

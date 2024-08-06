@@ -1,7 +1,8 @@
 #!/usr/bin/env bun
 
 import * as fs from 'fs'
-import { variants, type Variant } from './constants'
+import { defaultVariant, variants, type Variant } from './constants'
+import { importExportStr, importStr } from './util'
 
 const URL = 'https://cdn.hugeicons.com/icons'
 
@@ -9,7 +10,7 @@ const defaults = {
    iconName: '',
    strokeWidth: 1.5,
    color: 'currentColor',
-   variant: 'stroke-rounded' as const,
+   variant: defaultVariant,
    outputDir: './src/assets/icons/src',
 }
 
@@ -80,7 +81,7 @@ function updateIconsList() {
    const iconsFilePath = './src/assets/icons/icons.ts'
 
    if (!fs.existsSync(iconsFilePath)) fs.writeFileSync(iconsFilePath, '')
-   const iconStr = `export { default as ${getName(iconName)} } from '@icons/${iconName}-${variant}.svg'\n`
+   const iconStr = importExportStr(iconName, variant)
 
    const icons = fs.readFileSync(iconsFilePath, 'utf-8')
    if (icons.includes(iconStr)) return
@@ -103,7 +104,7 @@ async function writeToFile(iconPath: string, iconData: Response) {
 }
 
 function copyClipboard() {
-   const str = `import ${getName(iconName)} from '@icons/${iconName}-${variant}.svg'`
+   const str = importStr(iconName, variant)
    const proc = require('child_process').spawn('clip')
    proc.stdin.write(str)
    proc.stdin.end()
@@ -113,23 +114,4 @@ function writeConsoleMessages(iconPath: string) {
    console.log()
    console.log('📛', iconName, '🖌️ ', strokeWidth, ' 🎨', color, '🪆 ', variant)
    console.log('📂', iconPath)
-}
-
-function getName(str: string) {
-   let camelIconName = hyphenToCamelCase(str)
-   if (variant === 'stroke-rounded') nothing()
-   else if (variant === 'solid-rounded') camelIconName += 'Solid'
-   else camelIconName += hyphenToCamelCase(variant)
-   return camelIconName + 'Icon'
-}
-
-function nothing() {}
-
-function hyphenToCamelCase(str: string) {
-   let tmp = ''
-   let words = str.split('-')
-   words.forEach((word) => {
-      tmp += word.charAt(0).toUpperCase() + word.slice(1)
-   })
-   return tmp
 }

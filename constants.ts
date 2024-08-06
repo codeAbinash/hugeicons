@@ -1,7 +1,7 @@
 export const variants = [
+   'stroke-rounded' as const,
    'stroke-standard' as const,
    'solid-standard' as const,
-   'stroke-rounded' as const,
    'duotone-rounded' as const,
    'twotone-rounded' as const,
    'solid-rounded' as const,
@@ -9,5 +9,7 @@ export const variants = [
    'stroke-sharp' as const,
    'solid-sharp' as const,
 ]
+
+export const defaultVariant = variants[0]
 
 export type Variant = (typeof variants)[number]
