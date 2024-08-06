@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 
 import * as fs from 'fs'
-import { variants } from './constants'
+import { variants, type Variant } from './constants'
 
 const URL = 'https://cdn.hugeicons.com/icons'
 
@@ -9,7 +9,7 @@ const defaults = {
    iconName: '',
    strokeWidth: 1.5,
    color: 'currentColor',
-   variant: 'stroke-rounded',
+   variant: 'stroke-rounded' as const,
    outputDir: './src/assets/icons/src',
 }
 
@@ -18,11 +18,11 @@ let options = process.argv.slice(2)
 
 let color = defaults.color
 let strokeWidth = defaults.strokeWidth
-let variant = defaults.variant
+let variant: Variant = defaults.variant
 let outputDir = defaults.outputDir
 
 for (let i = 1; i < options.length; i++) {
-   const val = options[i]
+   const val = options[i] as Variant
    if (val.startsWith('#')) {
       color = val
       continue
@@ -31,7 +31,7 @@ for (let i = 1; i < options.length; i++) {
       strokeWidth = parseFloat(val)
       continue
    }
-   if (variants.includes(val)) {
+   if (variants.includes(val as Variant)) {
       variant = val
       continue
    }
@@ -74,6 +74,7 @@ async function main() {
       updateIconsList()
    }
 }
+main()
 
 function updateIconsList() {
    const iconsFilePath = './src/assets/icons/icons.ts'
@@ -115,12 +116,20 @@ function writeConsoleMessages(iconPath: string) {
 }
 
 function getName(str: string) {
+   let camelIconName = hyphenToCamelCase(str)
+   if (variant === 'stroke-rounded') nothing()
+   else if (variant === 'solid-rounded') camelIconName += 'Solid'
+   else camelIconName += hyphenToCamelCase(variant)
+   return camelIconName + 'Icon'
+}
+
+function nothing() {}
+
+function hyphenToCamelCase(str: string) {
    let tmp = ''
    let words = str.split('-')
    words.forEach((word) => {
       tmp += word.charAt(0).toUpperCase() + word.slice(1)
    })
-   return tmp + 'Icon'
+   return tmp
 }
-
-main()
