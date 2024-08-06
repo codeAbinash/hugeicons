@@ -63,34 +63,55 @@ async function main() {
       console.error('Please enter icon name to continue')
    } else {
       const iconPath = `${outputDir}/${iconName}-${variant}.svg`
-      console.log()
-      console.log('📛', iconName, '🖌️ ', strokeWidth, ' 🎨', color, '🪆 ', variant)
-      console.log('📂', iconPath)
-
-      const str = `import ${getName(iconName)} from '@icons/${iconName}-${variant}.svg'`
-      copyToClipboard(str)
-
+      writeConsoleMessages(iconPath)
       const url = `${URL}/${iconName}-${variant}.svg`
       const iconData = await fetch(url)
-      if (!iconData.ok) {
-         console.error(`Icon ${iconName}-${variant}.svg not found\n`)
-         process.exit(1)
-      }
 
-      const iconStr = replaceIconContent(await iconData.text())
-      createFolderIfNotExists(outputDir)
-
-      fs.writeFileSync(iconPath, iconStr)
-
+      exitIfError(iconData)
+      await writeToFile(iconPath, iconData)
       console.log()
-      //  console.log(`Icon ${iconName}-${variant}.svg downloaded successfully`)
+      copyClipboard()
+      updateIconsList()
    }
 }
 
-function copyToClipboard(text: string) {
-   var proc = require('child_process').spawn('clip')
-   proc.stdin.write(text)
+function updateIconsList() {
+   const iconsFilePath = './src/assets/icons/icons.ts'
+
+   if (!fs.existsSync(iconsFilePath)) fs.writeFileSync(iconsFilePath, '')
+   const iconStr = `export { default as ${getName(iconName)} } from '@icons/${iconName}-${variant}.svg'\n`
+
+   const icons = fs.readFileSync(iconsFilePath, 'utf-8')
+   if (icons.includes(iconStr)) return
+
+   fs.appendFileSync(iconsFilePath, iconStr)
+}
+
+function exitIfError(iconData: Response) {
+   if (!iconData.ok) {
+      console.error(`Icon ${iconName}-${variant}.svg not found\n`)
+      process.exit(1)
+   }
+}
+
+async function writeToFile(iconPath: string, iconData: Response) {
+   const iconStr = replaceIconContent(await iconData.text())
+   createFolderIfNotExists(outputDir)
+   if (fs.existsSync(iconPath)) console.log('\nIcon 🟢 updated')
+   fs.writeFileSync(iconPath, iconStr)
+}
+
+function copyClipboard() {
+   const str = `import ${getName(iconName)} from '@icons/${iconName}-${variant}.svg'`
+   const proc = require('child_process').spawn('clip')
+   proc.stdin.write(str)
    proc.stdin.end()
+}
+
+function writeConsoleMessages(iconPath: string) {
+   console.log()
+   console.log('📛', iconName, '🖌️ ', strokeWidth, ' 🎨', color, '🪆 ', variant)
+   console.log('📂', iconPath)
 }
 
 function getName(str: string) {
