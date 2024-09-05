@@ -71,7 +71,7 @@ async function main() {
       exitIfError(iconData)
       await writeToFile(iconPath, iconData)
       console.log()
-      copyClipboard()
+      // copyClipboard()
       updateIconsList()
    }
 }
