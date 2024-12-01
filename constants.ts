@@ -10,6 +10,6 @@ export const variants = [
    'solid-sharp' as const,
 ]
 
-export const defaultVariant = variants[0]
+export const defaultVariant = 'solid-rounded' as const
 
 export type Variant = (typeof variants)[number]
