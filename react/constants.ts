@@ -10,6 +10,6 @@ export const variants = [
   'solid-sharp' as const,
 ]
 
-export const defaultVariant = 'solid-rounded' as const
-
 export type Variant = (typeof variants)[number]
+
+export const URL = 'https://cdn.hugeicons.com/icons'
