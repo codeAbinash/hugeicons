@@ -48,7 +48,12 @@ const icons = iconsData.map((icon, index) => {
       .replace(/height="24"/g, 'height={size}')
       .replace(/"#141B34"/g, '{color}')
       .replace(/stroke-width="1.5"/g, 'stroke-width={strokeWidth}')
-      .replace(/<svg /g, '<svg className={className} '),
+      .replace(/<svg /g, '<svg className={className} ')
+      .replace(/clip-rule/g, 'clipRule')
+      .replace(/fill-rule/g, 'fillRule')
+      .replace(/stroke-width/g, 'strokeWidth')
+      .replace(/stroke-linecap/g, 'strokeLinecap')
+      .replace(/stroke-linejoin/g, 'strokeLinejoin'),
   }
 })
 
