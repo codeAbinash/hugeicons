@@ -53,7 +53,8 @@ const icons = iconsData.map((icon, index) => {
       .replace(/fill-rule/g, 'fillRule')
       .replace(/stroke-width/g, 'strokeWidth')
       .replace(/stroke-linecap/g, 'strokeLinecap')
-      .replace(/stroke-linejoin/g, 'strokeLinejoin'),
+      .replace(/stroke-linejoin/g, 'strokeLinejoin')
+      .replace(/stroke-miterlimit/g, 'strokeMiterlimit')
   }
 })
 
