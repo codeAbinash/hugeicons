@@ -1,8 +1,8 @@
 import * as fs from 'fs'
-import fetchIcons from './fetchIcons'
-import readConfig from './readConfig'
-import { createFolderIfNotExists, hyphenToCamelCase } from './utils'
-import { variants } from './constants'
+import fetchIcons from '../lib/fetchIcons'
+import readConfig from '../lib/readConfig'
+import { createFolderIfNotExists, hyphenToCamelCase } from '../lib/utils'
+import { variants } from '../lib/constants'
 
 const {
   outputDir = './src/assets/icons/hugeicons',

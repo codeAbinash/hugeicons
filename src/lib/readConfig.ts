@@ -9,10 +9,12 @@ type Config = {
   defaultVariant: string
 }
 
-export default function readConfig() {
-  let config = {}
+let config = {} as Config
 
-  if (!fs.existsSync('./hugeicons.config.json')) return {} as Config
+export default function readConfig() {
+  if (Object.keys(config).length > 0) return config
+  
+  if (!fs.existsSync('./hugeicons.config.json')) return config
 
   try {
     config = JSON.parse(fs.readFileSync('./hugeicons.config.json', 'utf8'))
