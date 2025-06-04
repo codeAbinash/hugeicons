@@ -1,1 +1,1 @@
-export const defaultParameters = `{ size = defaultSize, color = defaultColor, strokeWidth = defaultStrokeWidth, className }: IconProps`
+export const defaultParameters = `{ size = defaultSize, color = defaultColor, strokeWidth = defaultStrokeWidth, className }: HugeIconProps`

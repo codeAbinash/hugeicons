@@ -12,11 +12,11 @@ type Props = {
 export function generateIconComponent({ icons, pascalCaseIconName }: Props) {
   return `
 import React from 'react'
-import { Variant, IconProps, defaultStrokeWidth, defaultVariant, defaultColor, defaultSize } from './constants'
+import { Variant, HugeIconProps, defaultStrokeWidth, defaultVariant, defaultColor, defaultSize } from './constants'
 
-const iconMap: Record<Variant, React.FC<IconProps>> = {\n${variants.map((v, i) => `\t'${v}': ${icons[i].variant},`).join('\n')}\n}
+const iconMap: Record<Variant, React.FC<HugeIconProps>> = {\n${variants.map((v, i) => `\t'${v}': ${icons[i].variant},`).join('\n')}\n}
 
-export default function ${pascalCaseIconName}Icon({ variant, ...rest }: IconProps) {
+export default function ${pascalCaseIconName}Icon({ variant, ...rest }: HugeIconProps) {
   const Component = iconMap[variant || defaultVariant]
   return <Component {...rest} />
 }

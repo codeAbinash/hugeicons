@@ -16,7 +16,7 @@ export const variants = [\n  ${variants.map((v) => `'${v}' as const`).join(',\n 
 
 export type Variant = (typeof variants)[number]
 
-export type IconProps = {
+export type HugeIconProps = {
   variant?: Variant
   size?: number
   color?: string

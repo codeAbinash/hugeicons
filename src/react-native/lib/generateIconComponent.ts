@@ -5,13 +5,13 @@ export function generateIconComponent(icons: { variant: Variant; icon: string }[
   return `
 import React from 'react'
 import Svg, { Circle, ClipPath, Defs, Ellipse, G, Line, LinearGradient, Mask, Path, Polygon, Polyline, RadialGradient, Rect, Stop } from 'react-native-svg'
-import { Variant, IconProps, defaultStrokeWidth, defaultVariant, defaultColor, defaultSize } from './constants'
+import { Variant, HugeIconProps, defaultStrokeWidth, defaultVariant, defaultColor, defaultSize } from './constants'
 
-const iconMap: Record<Variant, React.FC<IconProps>> = {
+const iconMap: Record<Variant, React.FC<HugeIconProps>> = {
 ${variants.map((v, i) => `\t'${v}': ${icons[i].variant},`).join('\n')}
 }
 
-export default function ${pascalCaseIconName}Icon({ variant, ...rest }: IconProps) {
+export default function ${pascalCaseIconName}Icon({ variant, ...rest }: HugeIconProps) {
   const Component = iconMap[variant || defaultVariant]
   return <Component {...rest} />
 }
