@@ -86,5 +86,5 @@ export const defaultSize = ${defaultSize}
 
   fs.writeFileSync(constantsPath, constantsContent)
 
-  console.log('✅ Done 😎')
+  console.log('⚛️  React ✅ Done 😎')
 }
