@@ -14,7 +14,8 @@ const {
 export function generateConstantsFile() {
   const constantsPath = `${outputDir}/constants.ts`
 
-  const constantsContent = `
+  const constantsContent = `import { StyleProp, ViewStyle } from 'react-native'
+
 export const variants = [
   ${variants.map((v) => `'${v}' as const`).join(',\n  ')},
 ]
@@ -27,6 +28,7 @@ export type IconProps = {
   color?: string
   strokeWidth?: number
   className?: string
+  style?: StyleProp<ViewStyle>
 }
 
 export const defaultStrokeWidth = ${defaultStrokeWidth}

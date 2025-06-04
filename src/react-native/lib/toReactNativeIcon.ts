@@ -10,7 +10,7 @@ export function toReactNativeIcon(iconsData: string[]) {
     const processedIcon = icon
       .replace(/<\/?([a-z][\w-]*)([ >])/g, convertTagsToPascalCase)
       .replace(/(\s)([a-z][\w-]*-[a-z][\w-]*)(=)/g, convertAttributesToCamelCase)
-      .replace(/<Svg /g, '<Svg className={className} ')
+      .replace(/<Svg /g, '<Svg className={className} style={style} ')
       .replace(/width="24"/g, 'width={size}')
       .replace(/height="24"/g, 'height={size}')
       .replace(/"#141B34"/g, '{color}')
