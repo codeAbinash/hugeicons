@@ -1,4 +1,3 @@
-import * as fs from 'fs'
 import { defaultConfig, variants } from '../../lib/constants'
 import readConfig from '../../lib/readConfig'
 
@@ -10,14 +9,10 @@ const {
   defaultSize = defaultConfig.defaultSize,
 } = readConfig()
 
-export function generateConstantsFile() {
+export function generateConstantsFiles() {
   const constantsPath = `${outputDir}/constants.ts`
-
-  const constantsContent = `import { StyleProp, ViewStyle } from 'react-native'
-
-export const variants = [
-  ${variants.map((v) => `'${v}' as const`).join(',\n  ')},
-]
+  const constantsContent = `
+export const variants = [\n  ${variants.map((v) => `'${v}' as const`).join(',\n  ')}\n]
 
 export type Variant = (typeof variants)[number]
 
@@ -27,7 +22,6 @@ export type IconProps = {
   color?: string
   strokeWidth?: number
   className?: string
-  style?: StyleProp<ViewStyle>
 }
 
 export const defaultStrokeWidth = ${defaultStrokeWidth}
@@ -35,6 +29,5 @@ export const defaultColor = '${defaultColor}'
 export const defaultVariant = '${defaultVariant}'
 export const defaultSize = ${defaultSize}
 `
-
-  fs.writeFileSync(constantsPath, constantsContent)
+  return { constantsPath, constantsContent }
 }

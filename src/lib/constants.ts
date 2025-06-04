@@ -13,3 +13,12 @@ export const variants = [
 export type Variant = (typeof variants)[number]
 
 export const URL = 'https://cdn.hugeicons.com/icons'
+
+
+export const defaultConfig = {
+  outputDir: './src/assets/icons/hugeicons',
+  defaultColor: 'currentColor',
+  defaultStrokeWidth: 1.5,
+  defaultVariant: 'stroke-rounded',
+  defaultSize: 24,
+}
