@@ -1,7 +1,8 @@
 #!/usr/bin/env bun
 
-import generateReactIcon from './src/react/index'
-import readConfig from './src/lib/readConfig'
+import readConfig from "./src/lib/readConfig"
+import generateReactIcon from "./src/react/index"
+
 let options = process.argv.slice(2)
 
 const { targetPlatform = 'react' } = readConfig()

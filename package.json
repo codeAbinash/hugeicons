@@ -32,9 +32,7 @@
     "typescript": "^5.5.4"
   },
   "bin": {
-    "ic": "dist/react/index.js",
-    "ic-old": "dist/index.js",
-    "rmic": "dist/rmic.js"
+    "ic": "dist/index.js"
   },
   "dependencies": {
     "react": "^19.0.0"
