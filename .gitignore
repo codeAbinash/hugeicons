@@ -1,6 +1,6 @@
 tmp
 node_modules
 dist
-src
+src/assets
 icons
 .idea

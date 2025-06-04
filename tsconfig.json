@@ -8,5 +8,14 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist"
   },
-  "include": ["./index.ts", "rmic.ts", "react", "./lib", "./utils", "constants.ts", "react/index.ts", "hello.ts"]
+  "include": [
+    "index-old.ts",
+    "others/rmic.ts",
+    "react",
+    "./lib",
+    "./utils",
+    "others/constants.ts",
+    "index.ts",
+    "hello.ts"
+  ]
 }
