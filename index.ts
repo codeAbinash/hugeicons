@@ -1,7 +1,8 @@
 #!/usr/bin/env bun
 
-import readConfig from "./src/lib/readConfig"
-import generateReactIcon from "./src/react/index"
+import readConfig from './src/lib/readConfig'
+import generateReactNativeIcon from './src/react-native/index'
+import generateReactIcon from './src/react/index'
 
 let options = process.argv.slice(2)
 
@@ -17,8 +18,12 @@ switch (targetPlatform) {
   case 'react':
     generateReactIcon(iconName)
     break
+  case 'react-native':
+    generateReactNativeIcon(iconName)
+    break
   default:
     console.error('Target platform `' + targetPlatform + '` is not supported')
-    console.log('Now only `react` is supported')
+    console.log('Supported platforms are `react` and `react-native`')
+    console.log('Please specify one of the supported platforms in the configuration.')
     process.exit(1)
 }

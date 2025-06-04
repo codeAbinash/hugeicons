@@ -1,5 +1,27 @@
-export default async function generateReactIcon(iconName: string) {
-  console.warn('This function is not implemented for React Native. Please use the React version instead.')
-  // The implementation for React Native would go here, similar to the React version.
-  // It would involve fetching icons, transforming them, and generating a component.
+import * as fs from 'fs'
+import fetchIcons from '../lib/fetchIcons'
+import readConfig from '../lib/readConfig'
+import { createFolderIfNotExists, hyphenToCamelCase } from '../lib/utils'
+import { defaultConfig } from './lib/constants'
+import { generateConstantsFile } from './lib/generateConstantsFile'
+import { generateIconComponent } from './lib/generateIconComponent'
+import { printCompletionMessage } from './lib/printCompletionMessage'
+import { toReactNativeIcon } from './lib/toReactNativeIcon'
+
+const { outputDir = defaultConfig.outputDir } = readConfig()
+
+export default async function generateReactNativeIcon(iconName: string) {
+  const pascalCaseIconName = hyphenToCamelCase(iconName)
+  const icons = toReactNativeIcon(await fetchIcons(iconName))
+
+  const ComponentPath = `${outputDir}/${pascalCaseIconName}Icon.tsx`
+  console.log('📁 ' + ComponentPath)
+
+  const output = generateIconComponent(icons, pascalCaseIconName)
+
+  createFolderIfNotExists(outputDir)
+  await fs.promises.writeFile(ComponentPath, output)
+
+  generateConstantsFile()
+  printCompletionMessage()
 }

@@ -1,0 +1,39 @@
+import * as fs from 'fs'
+import { variants } from '../../lib/constants'
+import readConfig from '../../lib/readConfig'
+import { defaultConfig } from './constants'
+
+const {
+  outputDir = defaultConfig.outputDir,
+  defaultColor = defaultConfig.defaultColor,
+  defaultStrokeWidth = defaultConfig.defaultStrokeWidth,
+  defaultVariant = defaultConfig.defaultVariant,
+  defaultSize = defaultConfig.defaultSize,
+} = readConfig()
+
+export function generateConstantsFile() {
+  const constantsPath = `${outputDir}/constants.ts`
+
+  const constantsContent = `
+export const variants = [
+  ${variants.map((v) => `'${v}' as const`).join(',\n  ')},
+]
+
+export type Variant = (typeof variants)[number]
+
+export type IconProps = {
+  variant?: Variant
+  size?: number
+  color?: string
+  strokeWidth?: number
+  className?: string
+}
+
+export const defaultStrokeWidth = ${defaultStrokeWidth}
+export const defaultColor = '${defaultColor}'
+export const defaultVariant = '${defaultVariant}'
+export const defaultSize = ${defaultSize}
+`
+
+  fs.writeFileSync(constantsPath, constantsContent)
+}
