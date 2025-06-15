@@ -1,3 +1,4 @@
+import * as fs from 'fs'
 import { defaultConfig, variants } from '../../lib/constants'
 import readConfig from '../../lib/readConfig'
 
@@ -29,5 +30,7 @@ export const defaultColor = '${defaultColor}'
 export const defaultVariant = '${defaultVariant}'
 export const defaultSize = ${defaultSize}
 `
+
+  fs.writeFileSync(constantsPath, constantsContent)
   return { constantsPath, constantsContent }
 }
