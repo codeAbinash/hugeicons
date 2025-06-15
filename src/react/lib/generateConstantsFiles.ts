@@ -23,7 +23,7 @@ export type HugeIconProps = {
   color?: string
   strokeWidth?: number
   className?: string
-}
+} & React.SVGProps<SVGSVGElement>
 
 export const defaultStrokeWidth = ${defaultStrokeWidth}
 export const defaultColor = '${defaultColor}'

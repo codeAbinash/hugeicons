@@ -13,6 +13,7 @@ export function toReactIcon(iconsData: string[]) {
       .replace(/"#141B34"/g, '{color}')
       .replace(/strokeWidth="1.5"/g, 'strokeWidth={strokeWidth}')
       .replace(/<svg /g, '<svg className={className} ')
+      .replace(/<svg ([^>]*)>/g, '<svg $1{...rest}>')
 
     return {
       variant: hyphenToCamelCase(variant) as Variant,
