@@ -15,7 +15,7 @@ import { HugeIconProps, defaultStrokeWidth, defaultColor, defaultSize } from './
 ${icons
   .map(({ variant, icon }) => {
     const v = variant === camelVariant ? '' : hyphenToCamelCase(variant)
-    return `export function ${pascalCaseIconName}${v}(${defaultParameters}) {
+    return `export function ${pascalCaseIconName}${v}Icon(${defaultParameters}) {
 return (${icon})
 }`
   })
