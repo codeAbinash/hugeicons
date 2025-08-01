@@ -1,9 +1,9 @@
-import { type Variant } from '../../lib/constants'
+import { defaultConfig, type Variant } from '../../lib/constants'
 import readConfig from '../../lib/readConfig'
 import { hyphenToCamelCase } from '../../lib/utils'
 import { defaultParameters } from './constants'
 
-const { defaultVariant } = readConfig()
+const { defaultVariant = defaultConfig.defaultVariant } = readConfig()
 const camelVariant = hyphenToCamelCase(defaultVariant)
 
 export function generateIconComponent(icons: { variant: Variant; icon: string }[], pascalCaseIconName: string) {
