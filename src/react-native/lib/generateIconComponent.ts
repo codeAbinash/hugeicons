@@ -1,27 +1,24 @@
-import { Variant, variants } from '../../lib/constants'
+import { defaultConfig, type Variant } from '../../lib/constants'
+import readConfig from '../../lib/readConfig'
+import { hyphenToCamelCase } from '../../lib/utils'
 import { defaultParameters } from './constants'
+
+const { defaultVariant = defaultConfig.defaultVariant } = readConfig()
+const camelVariant = hyphenToCamelCase(defaultVariant)
 
 export function generateIconComponent(icons: { variant: Variant; icon: string }[], pascalCaseIconName: string) {
   return `
 import React from 'react'
 import Svg, { Circle, ClipPath, Defs, Ellipse, G, Line, LinearGradient, Mask, Path, Polygon, Polyline, RadialGradient, Rect, Stop } from 'react-native-svg'
-import { Variant, HugeIconProps, defaultStrokeWidth, defaultVariant, defaultColor, defaultSize } from './constants'
-
-const iconMap: Record<Variant, React.FC<HugeIconProps>> = {
-${variants.map((v, i) => `\t'${v}': ${icons[i].variant},`).join('\n')}
-}
-
-export default function ${pascalCaseIconName}Icon({ variant, ...rest }: HugeIconProps) {
-  const Component = iconMap[variant || defaultVariant]
-  return <Component {...rest} />
-}
+import { HugeIconProps, defaultStrokeWidth, defaultColor, defaultSize } from './constants'
 
 ${icons
-  .map(
-    ({ variant, icon }) => `function ${variant}(${defaultParameters}) {
-  return (${icon})
-}`,
-  )
+  .map(({ variant, icon }) => {
+    const v = variant === camelVariant ? '' : hyphenToCamelCase(variant)
+    return `export function ${pascalCaseIconName}${v}Icon(${defaultParameters}) {
+return (${icon})
+}`
+  })
   .join('\n\n')}
 `
 }

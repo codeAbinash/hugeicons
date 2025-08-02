@@ -1,12 +1,11 @@
 import * as fs from 'fs'
-import { defaultConfig, variants } from '../../lib/constants'
+import { defaultConfig } from '../../lib/constants'
 import readConfig from '../../lib/readConfig'
 
 const {
   outputDir = defaultConfig.outputDir,
   defaultColor = defaultConfig.defaultColor,
   defaultStrokeWidth = defaultConfig.defaultStrokeWidth,
-  defaultVariant = defaultConfig.defaultVariant,
   defaultSize = defaultConfig.defaultSize,
 } = readConfig()
 
@@ -15,14 +14,7 @@ export function generateConstantsFile() {
 
   const constantsContent = `import { StyleProp, ViewStyle } from 'react-native'
 
-export const variants = [
-  ${variants.map((v) => `'${v}' as const`).join(',\n  ')},
-]
-
-export type Variant = (typeof variants)[number]
-
 export type HugeIconProps = {
-  variant?: Variant
   size?: number
   color?: string
   strokeWidth?: number
@@ -32,7 +24,6 @@ export type HugeIconProps = {
 
 export const defaultStrokeWidth = ${defaultStrokeWidth}
 export const defaultColor = '${defaultColor}'
-export const defaultVariant = '${defaultVariant}'
 export const defaultSize = ${defaultSize}
 `
 
