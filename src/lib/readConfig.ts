@@ -1,12 +1,12 @@
 import * as fs from 'fs'
 
 type Config = {
-  outputDir?: string
-  targetPlatform?: 'react' | 'react-native'
-  defaultStrokeWidth?: number
-  defaultColor?: string
-  defaultSize?: number
-  defaultVariant?: string
+  outputDir: string
+  targetPlatform: 'react' | 'react-native'
+  defaultStrokeWidth: number
+  defaultColor: string
+  defaultSize: number
+  defaultVariant: string
 }
 
 let config = {} as Config

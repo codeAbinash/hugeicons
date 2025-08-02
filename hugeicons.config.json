@@ -1,6 +1,6 @@
 {
   "outputDir": "./src/assets/icons/hugeicons",
-  "targetPlatform": "react-native",
+  "targetPlatform": "react",
   "defaultStrokeWidth": 1.5,
   "defaultColor": "currentColor",
   "defaultSize": 24,

@@ -1,4 +1,4 @@
-#!/usr/bin/env bun
+#!/usr/bin/env node
 
 import readConfig from './src/lib/readConfig'
 import generateReactNativeIcon from './src/react-native/index'
